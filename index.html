@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensibilidades J - Generador Free Fire</title>
+    <style>
+        :root {
+            --bg-dark: #0a0c10;
+            --card-bg: #121620;
+            --accent-red: #ff1f43;
+            --accent-red-hover: #dd1635;
+            --text-main: #ffffff;
+            --text-muted: #8b949e;
+            --border-color: #21262d;
+            --input-bg: #1c212c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Banner Superior */
+        .top-banner {
+            background: linear-gradient(90deg, #7a0010, var(--accent-red));
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(255, 31, 67, 0.3);
+        }
+
+        /* Logo / Encabezado */
+        .header-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-title {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .logo-title span {
+            color: var(--accent-red);
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* Contenedor Principal (Tarjeta de Configuración) */
+        .main-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .card-title span {
+            color: var(--accent-red);
+        }
+
+        .card-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+        }
+
+        /* Formularios y Selectores */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-select {
+            width: 100%;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+
+        .form-select:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 2px rgba(255, 31, 67, 0.2);
+        }
+
+        /* Botón Generar */
+        .btn-generate {
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid var(--accent-red);
+            color: var(--text-main);
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-generate:hover {
+            background-color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(255, 31, 67, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-generate:active {
+            transform: translateY(1px);
+        }
+
+        /* Sección de Resultados */
+        .result-container {
+            margin-top: 25px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 25px;
+            display: none;
+        }
+
+        .result-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-header {
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .sens-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sens-box {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .sens-name {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .sens-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .hud-box {
+            background: linear-gradient(135deg, #1c212c, #141923);
+            border: 1px solid rgba(255, 31, 67, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .hud-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .hud-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* Footer y Estado */
+        .footer-status {
+            background-color: rgba(0, 255, 100, 0.1);
+            color: #00ff64;
+            border: 1px solid rgba(0, 255, 100, 0.2);
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--text-main);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Banner Superior -->
+    <div class="top-banner">
+        🔥 MÁS MODELOS, MACROS Y DPI EXCLUSIVOS EN LA VERSIÓN PRO
+    </div>
+
+    <!-- Encabezado con el nombre actualizado -->
+    <div class="header-container">
+        <h1 class="logo-title">SENSIBILIDADES <span>J</span></h1>
+        <div class="logo-subtitle">Free Edition</div>
+    </div>
+
+    <!-- Contenedor de Configuración -->
+    <div class="main-card">
+        <h2 class="card-title"><span>S</span>ensibilidades</h2>
+        <div class="card-subtitle">Configuración Base</div>
+
+        <!-- Selector de Dispositivo -->
+        <div class="form-group">
+            <label class="form-label" for="device-brand">📱 Selecciona la Marca / Tipo</label>
+            <select id="device-brand" class="form-select" onchange="updateModels()">
+                <option value="" disabled selected>Elige el dispositivo...</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Motorola">Motorola</option>
+                <option value="iPhone">iPhone / iOS</option>
+                <option value="Xiaomi">Xiaomi / Redmi</option>
+                <option value="Infinix">Infinix</option>
+            </select>
+        </div>
+
+        <!-- Selector de Modelo Específico -->
+        <div class="form-group">
+            <label class="form-label" for="device-model">⚙️ Selecciona el Modelo</label>
+            <select id="device-model" class="form-select" disabled>
+                <option value="" disabled selected>Esperando marca...</option>
+            </select>
+        </div>
+
+        <!-- Botón de Generar -->
+        <button class="btn-generate" onclick="generateSensitivity()">
+            🎯 Generar
+        </button>
+
+        <!-- Bloque Oculto de Resultados -->
+        <div class="result-container" id="resultBlock">
+            <div class="result-header" id="resultDeviceName">CONFIGURACIÓN GENERADA</div>
+            
+            <div class="sens-grid">
+                <div class="sens-box">
+                    <div class="sens-name">General</div>
+                    <div class="sens-value" id="sens-general">0</div>
+                </div>
+                <div class="sens-box">
+                    <div class="sens-name">Mira de Punto Rojo</div>
+                    <div class="sens-value" id="sens-reddot">0</div>
+                </div>
+                <div class="sens-box">
+                    <div class="sens-name">Mira x2</div>
+                    <div class="sens-value" id="sens-x2">0</div>
+                </div>
+                <div class="sens-box">
+                    <div class="sens-name">Mira x4</div>
+                    <div class="sens-value" id="sens-x4">0</div>
+                </div>
+                <div class="sens-box">
+                    <div class="sens-name">Mira AWM</div>
+                    <div class="sens-value" id="sens-awm">0</div>
+                </div>
+                <div class="sens-box">
+                    <div class="sens-name">Cámara (360)</div>
+                    <div class="sens-value" id="sens-cam">0</div>
+                </div>
+            </div>
+
+            <div class="hud-box">
+                <div class="hud-title">Tamaño de Botón de Disparo recomendado</div>
+                <div class="hud-value" id="hud-button">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicador de Estado -->
+    <div class="footer-status">
+        ● SYSTEM ONLINE
+    </div>
+
+    <!-- Iconos de Redes Sociales -->
+    <div class="social-container">
+        <a href="#" class="social-icon">IG</a>
+        <a href="#" class="social-icon">YT</a>
+        <a href="#" class="social-icon">TK</a>
+    </div>
+
+    <script>
+        // Diccionario de modelos por marca
+        const modelsData = {
+            "Samsung": [
+                "Galaxy A14", "Galaxy A34", "Galaxy A54", "Galaxy S23 Ultra", "Galaxy S22", "Galaxy Note 20 Ultra", "Galaxy M34"
+            ],
+            "Motorola": [
+                "Moto G56 5G", "Moto G14", "Moto G24", "Moto G54 5G", "Moto G84", "Edge 40 Neo", "Edge 50 Pro"
+            ],
+            "iPhone": [
+                "iPhone 11", "iPhone 12 Pro", "iPhone 13", "iPhone 14 Pro Max", "iPhone 15", "iPhone XR"
+            ],
+            "Xiaomi": [
+                "Redmi Note 12 Pro", "Redmi Note 13", "POCO X5 Pro", "POCO F5", "Xiaomi 13 Ultra", "Redmi 12"
+            ],
+            "Infinix": [
+                "Hot 30i", "Hot 40 Pro", "Note 30 Pro", "Zero 30 5G", "Smart 8"
+            ]
+        };
+
+        function updateModels() {
+            const brandSelect = document.getElementById("device-brand");
+            const modelSelect = document.getElementById("device-model");
+            const selectedBrand = brandSelect.value;
+
+            modelSelect.innerHTML = '<option value="" disabled selected>Selecciona tu modelo...</option>';
+            
+            if (modelsData[selectedBrand]) {
+                modelSelect.disabled = false;
+                modelsData[selectedBrand].forEach(model => {
+                    let option = document.createElement("option");
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            } else {
+                modelSelect.disabled = true;
+                modelSelect.innerHTML = '<option value="" disabled selected>Esperando marca...</option>';
+            }
+            
+            document.getElementById("resultBlock").classList.remove("active");
+        }
+
+        function generateSensitivity() {
+            const brand = document.getElementById("device-brand").value;
+            const model = document.getElementById("device-model").value;
+
+            if (!brand || !model) {
+                alert("Por favor, selecciona tanto la marca como el modelo de tu dispositivo.");
+                return;
+            }
+
+            let seed = 0;
+            for (let i = 0; i < model.length; i++) {
+                seed += model.charCodeAt(i);
+            }
+
+            // Sensibilidades competitivas calibradas de Free Fire (Máximo 200)
+            const general = 160 + (seed % 41); 
+            const reddot = 150 + ((seed * 2) % 51); 
+            const x2 = 155 + ((seed * 3) % 46); 
+            const x4 = 145 + ((seed * 4) % 56); 
+            const awm = 80 + ((seed * 5) % 61);   
+            const cam = 130 + ((seed * 6) % 71);
+
+            const buttonSize = 42 + (seed % 17);
+
+            document.getElementById("sens-general").textContent = general;
+            document.getElementById("sens-reddot").textContent = reddot;
+            document.getElementById("sens-x2").textContent = x2;
+            document.getElementById("sens-x4").textContent = x4;
+            document.getElementById("sens-awm").textContent = awm;
+            document.getElementById("sens-cam").textContent = cam;
+            document.getElementById("hud-button").textContent = buttonSize + "%";
+
+            document.getElementById("resultDeviceName").textContent = `CALIBRACIÓN: ${model.toUpperCase()}`;
+            document.getElementById("resultBlock").classList.add("active");
+        }
+    </script>
+</body>
+</html>
